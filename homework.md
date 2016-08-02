@@ -22,46 +22,46 @@ Using the SQL Database file given to you as the source of data to answer the que
   -- Revision of concepts that we've learnt in SQL today
 
   1. Select the names of all users.
-  
-  SELECT * FROM users
 
-   id |       name       
-  ----+------------------
-    1 | Rick Henri
-    2 | Jay Chetty
-    3 | Keith Douglas
-    4 | Ashleigh Adams
-    5 | Euan Blackledge
-    6 | Chris Flint
-    7 | Nico di Lillo
-    8 | Joe Maher
-    9 | Marie Moyles
-   10 | Iain Stewart
-   11 | Megan Strachan
-   12 | Russell Williams
-   13 | Sam Werngren
-   14 | Natalie Simpson
-   15 | Davide de Lerma
-   16 | Josh Kearns
-   17 | Renwick Drysdale
-   18 | Brian Morrice
+  SELECT name FROM users;
+
+         name       
+  ------------------
+   Rick Henri
+   Jay Chetty
+   Keith Douglas
+   Ashleigh Adams
+   Euan Blackledge
+   Chris Flint
+   Nico di Lillo
+   Joe Maher
+   Marie Moyles
+   Iain Stewart
+   Megan Strachan
+   Russell Williams
+   Sam Werngren
+   Natalie Simpson
+   Davide de Lerma
+   Josh Kearns
+   Renwick Drysdale
+   Brian Morrice
   (18 rows)
 
   ------------------------------------------------
 
   2. Select the names of all shows that cost less than £15.
 
-  SELECT * FROM shows WHERE price < 15;
+  SELECT name FROM shows WHERE price < 15;
 
-   id | created_at |             name             | price 
-  ----+------------+------------------------------+-------
-    1 | 2016-08-23 | Le Haggis                    | 12.99
-    5 | 2016-08-23 | Paul Dabek Mischief          | 12.99
-    9 | 2016-08-23 | Best of Burlesque            |  7.99
-   10 | 2016-08-23 | Two become One               |  8.50
-   11 | 2016-08-23 | Urinetown                    |  8.50
-   12 | 2016-08-23 | Two girls, one cup of comedy |  6.00
-  (6 rows)
+                name             
+   ------------------------------
+    Le Haggis
+    Paul Dabek Mischief 
+    Best of Burlesque
+    Two become One
+    Urinetown
+    Two girls, one cup of comedy
+   (6 rows)
 
   3. Insert a user with the name "Val Gibson" into the users table.
 
@@ -215,7 +215,9 @@ Using the SQL Database file given to you as the source of data to answer the que
 
   19. Select the number of users who want to see "Shitfaced Shakespeare".
   
-  SELECT name FROM "users" INNER JOIN "shows_users" ON users.id = shows_users.user_id WHERE show_id = 2;
+  SELECT count(name) FROM "users" INNER JOIN "shows_users" 
+  ON users.id = shows_users.user_id WHERE show_id = 2;
+
         name       
   -----------------
    Keith Douglas
@@ -227,7 +229,8 @@ Using the SQL Database file given to you as the source of data to answer the que
    Natalie Simpson
   (7 rows)
 
-  20. Select all of the user names and the count of shows they re going to see.
+  20. Select all of the
+ user names and the count of shows they re going to see.
 
   SELECT name, COUNT(shows_users.show_id) AS no_of_shows FROM "shows_users" 
   INNER JOIN users ON users.id = shows_users.user_id 
@@ -251,6 +254,7 @@ Using the SQL Database file given to you as the source of data to answer the que
    Jay Chetty       |           5
    Rick Henri       |           5
   (15 rows)
+
 
   21. SELECT all users who are going to a show at 17:15.
 

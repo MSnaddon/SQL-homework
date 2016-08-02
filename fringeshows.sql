@@ -157,14 +157,17 @@ INSERT INTO "shows_users" (show_id, user_id) VALUES (13, 14);
 
 
 -- Running section
-SELECT * FROM users;
-SELECT * FROM shows WHERE price < 15;
+SELECT name FROM users;
+SELECT name FROM shows WHERE price < 15;
 INSERT INTO "users" (name) VALUES ('Val Gibson');
 INSERT INTO "shows_users" (show_id, user_id) VALUES (12, 19);
 UPDATE users SET name = 'Valerie Gibson' WHERE name = 'Val Gibson';
 DELETE FROM "users" WHERE name = 'Valerie Gibson';
 DELETE FROM "shows_users" WHERE shows_users.user_id = 19;
-SELECT name, price FROM "shows" ORDER BY price ASC;
+
+
+
+SELECT name, price FROM "shows" ORDER BY price;
 SELECT AVG(price) FROM "shows";
 SELECT MIN(price) FROM "shows";
 SELECT SUM(price) FROM "shows";
@@ -179,7 +182,7 @@ SELECT name FROM "users" WHERE name LIKE '%er%';
 
 SELECT "time" FROM "times" INNER JOIN shows ON "times".show_id = shows.id AND shows.name = 'Edinburgh Royal Tattoo';
 
-SELECT name FROM "users" INNER JOIN "shows_users" ON users.id = shows_users.user_id WHERE show_id = 2;
+SELECT count(name) FROM "users" INNER JOIN "shows_users" ON users.id = shows_users.user_id WHERE show_id = 2;
 
 SELECT name, COUNT(shows_users.show_id) AS no_of_shows FROM "shows_users" 
 INNER JOIN users ON users.id = shows_users.user_id 
@@ -189,26 +192,3 @@ SELECT name FROM "users"
 INNER JOIN shows_users ON users.id = shows_users.user_id 
 INNER JOIN "times" ON times.show_id = shows_users.show_id 
 WHERE times.time = '17:15';
-
-
-
--- CREATE TABLE "users" (
---   "id" serial8 primary key, 
---   "name" varchar(255)
---   );
--- CREATE TABLE "shows" (
---   "id" serial8 primary key,
---   "created_at" date,
---   "name" varchar(255),
---   "price" decimal
---   );
--- CREATE TABLE "times" (
---   "id" serial8 primary key,
---   "time" varchar(255),
---   "show_id" int2
---   );
--- CREATE TABLE "shows_users" (
---   "id" serial8 primary key,
---   "show_id" int8,
---   "user_id" int8
---   );
